@@ -15,13 +15,28 @@ Shell::Shell() {
 	std::cin >> user_name;
 
 	User usr(user_name);
-
-	std::string path;
-	std::cout << "\nEnter path: ";
-	std::cin >> path;
-	usr.create_fs(path);
-
 	std::string cmd;
+
+	do {
+
+
+		std::cout << "\nEnter create_fs/open_fs: ";
+		std::cin >> cmd;
+
+		std::string path;
+		std::cout << "\nEnter path: ";
+		std::cin >> path;
+
+		if (cmd == "create_fs") {
+			usr.create_fs(path);
+		}
+		else if (cmd == "open_fs") {
+			usr.open_fs(path);
+		} else {
+			std::cout << "\nERROR::command not found." << std::endl;
+		}
+	} while ((cmd != "open_fs") && (cmd != "create_fs"));
+
 	do {
 		std::cout << usr.pwd().substr(0, usr.pwd().find_first_of('\0')) << ">";
 		std::cin >> cmd;
@@ -85,7 +100,7 @@ Shell::Shell() {
 			std::getline(std::cin, data);
 			usr.write_to_file(file_name, data);
 
-		} else {
+		} else if(cmd != "exit") {
 			std::cout << "ERROR::command not found" << std::endl;
 		}
 

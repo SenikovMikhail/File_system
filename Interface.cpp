@@ -6,7 +6,7 @@
 
 Interface::Interface(const std::string& usr_name, const std::string& _path)
 	: user_name{ usr_name }
-	, file { std::make_shared<std::fstream>(_path, std::ios::in | std::ios::out | std::ios::ate) }
+	, file { std::make_shared<std::fstream>(_path, std::ios::in | std::ios::out | std::ios::ate)}
 	, file_sys{ nullptr }
 {}
 
@@ -184,6 +184,7 @@ void Interface::create_fs() {
 
 void Interface::open_fs() {
 
+	file_sys = std::make_shared<File_system>(file);
 	current_offset = file_sys->get_start_offset();
 	current_node.fill(file_sys->read_i_node(current_offset));
 	pwd = current_node.get_name();

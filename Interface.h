@@ -15,7 +15,7 @@ class Interface {
 
 public:
 
-	Interface(const std::string& usr_name, const std::string& _path);// std::shared_ptr<std::fstream> _file);
+	Interface(const std::string& usr_name, const std::string& _path);
 
 	void create_dir(const std::string& name);
 	void read_dir(const std::string& name);
